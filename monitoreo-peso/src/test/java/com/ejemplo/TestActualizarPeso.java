@@ -1,6 +1,4 @@
-package test.java.com.ejemplo;
-
-import main.java.com.ejemplo.Usuario;
+package com.ejemplo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
