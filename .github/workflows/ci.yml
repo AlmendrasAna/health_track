@@ -39,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
-          path: auth-console/target/surefire-reports/
+          path:  monitoreo-peso/target/surefire-reports/
