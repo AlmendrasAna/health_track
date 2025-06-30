@@ -1,0 +1,42 @@
+
+name: test CI
+
+on:
+
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cachear dependencias Maven
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven
+
+      - name: Construir y ejecutar pruebas
+        working-directory: auth-console
+        run: mvn clean test
+      - name: Subir reportes de pruebas (Surefire)
+        if: always()  # Se ejecuta este paso aunque los tests fallen
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: auth-console/target/surefire-reports/
