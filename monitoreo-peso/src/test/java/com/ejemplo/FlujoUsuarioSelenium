@@ -1,0 +1,49 @@
+package com.ejemplo;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class FlujoUsuario {
+    public static void main(String[] args) {
+        // Ruta al driver de Firefox (geckodriver debe estar en el PATH o especificarse aquí)
+        System.setProperty("webdriver.gecko.driver", "/ruta/a/geckodriver");
+
+        // Iniciar el navegador
+        WebDriver driver = new FirefoxDriver();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        try {
+            // 1. Ir al formulario
+            driver.get("http://localhost:8080/formulario");
+
+            // 2. Llenar el nombre
+            WebElement inputNombre = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nombre")));
+            inputNombre.sendKeys("Juan Pérez");
+
+            // 3. Llenar el peso
+            WebElement inputPeso = driver.findElement(By.id("peso"));
+            inputPeso.sendKeys("70");
+
+            // 4. Hacer clic en enviar
+            WebElement botonEnviar = driver.findElement(By.id("enviar"));
+            botonEnviar.click();
+
+            // 5. Esperar y verificar mensaje de éxito
+            WebElement mensaje = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mensaje")));
+            if (mensaje.getText().contains("Gracias")) {
+                System.out.println("✅ Prueba exitosa: Datos enviados correctamente.");
+            } else {
+                System.out.println("❌ Prueba fallida: Mensaje inesperado.");
+            }
+
+        } catch (Exception e) {
+            System.out.println("❌ Error en la simulación: " + e.getMessage());
+        } finally {
+            // Cerrar el navegador
+            driver.quit();
+        }
+    }
+}
