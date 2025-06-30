@@ -32,7 +32,7 @@ jobs:
             ${{ runner.os }}-maven
 
       - name: Construir y ejecutar pruebas
-        working-directory: auth-console
+        working-directory: health_track
         run: mvn clean test
       - name: Subir reportes de pruebas (Surefire)
         if: always()  # Se ejecuta este paso aunque los tests fallen
