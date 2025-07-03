@@ -42,6 +42,7 @@ jobs:
         run: mvn clean test
 
       - name: Ejecutar pruebas Selenium
+        working-directory: monitoreo-peso
         run: mvn test
 
       - name: Instalar JMeter
