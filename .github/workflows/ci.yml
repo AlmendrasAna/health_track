@@ -55,7 +55,7 @@ jobs:
       - name: Ejecutar pruebas de rendimiento con JMeter
         working-directory: monitoreo-peso
         run: |
-          apache-jmeter-5.6.3/bin/jmeter -n -t test.jmx -l result.jtl -e -o reporte
+          apache-jmeter-5.6.3/bin/jmeter -n -t testRendimientoJmeter.jmx -l result.jtl -e -o reporte
 
       - name: Publicar reporte de JMeter
         if: always()
