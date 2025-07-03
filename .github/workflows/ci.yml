@@ -45,20 +45,23 @@ jobs:
         run: mvn test
 
       - name: Instalar JMeter
+        working-directory: monitoreo-peso
         run: |
           wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz
           tar -xzf apache-jmeter-5.6.3.tgz
           export PATH=$PATH:$PWD/apache-jmeter-5.6.3/bin
 
       - name: Ejecutar pruebas de rendimiento con JMeter
+        working-directory: monitoreo-peso
         run: |
           apache-jmeter-5.6.3/bin/jmeter -n -t test.jmx -l result.jtl -e -o reporte
 
       - name: Publicar reporte de JMeter
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: reporte-jmeter
-          path: reporte
+          path: monitoreo-peso/target/reporte/
 
       - name: Subir reportes de pruebas (Surefire)
         if: always()
