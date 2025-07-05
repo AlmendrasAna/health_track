@@ -43,7 +43,38 @@
 | Análisis de calidad          | SonarQube                          |
 
 ---
+## 🧪 Pruebas unitarias: `UsuarioTest`
 
+Esta clase contiene pruebas unitarias para verificar el comportamiento básico del modelo `Usuario`. Las pruebas aseguran que los métodos principales de la clase funcionen correctamente y que los datos del usuario se manejen como se espera.
+
+### ✅ Métodos probados
+
+| Método             | Propósito                                                                 |
+|--------------------|--------------------------------------------------------------------------|
+| `getPeso()`        | Verifica que el peso inicial del usuario se obtenga correctamente.       |
+| `getNombre()`      | Verifica que el nombre del usuario se obtenga correctamente.             |
+| `actualizarPeso()` | Asegura que el método actualiza correctamente el peso del usuario.       |
+
+### 🧪 Detalles de cada test
+
+- **`testGetPeso`**  
+  Comprueba que el método `getPeso()` devuelve el peso inicial (`150`) correctamente.
+
+- **`testGetNombre`**  
+  Verifica que el método `getNombre()` devuelve el nombre `"Maria"` como se espera.
+
+- **`testActualizarPeso`**  
+  Asegura que el método `actualizarPeso(130)` actualiza el peso del usuario a `130`.  
+  Este test también actúa como una prueba de regresión para evitar errores anteriores en la lógica de actualización.
+
+### 🛠️ Cómo ejecutar los tests
+
+```bash
+mvn test
+```
+
+- Consulta el archivo `monitoreo-peso/src/test/java/com/ejemplo/TestActualizarPeso.java` para más detalles.
+---
 # 🧪 Prueba de Regresión – HealthTrack
 
 Una **prueba de regresión** tiene como objetivo verificar que una nueva funcionalidad o corrección no haya afectado negativamente las funcionalidades existentes del sistema.
@@ -59,11 +90,6 @@ Una **prueba de regresión** tiene como objetivo verificar que una nueva funcion
 
 ### 🧪 Test de Regresión: `testActualizarPeso`
 
-- Comando para correr el test
-```
-mvn test
-```
-
 Este test verifica que el método `actualizarPeso(double nuevoPeso)` actualiza correctamente el peso del usuario.  
 Anteriormente, existía un error en el que el nuevo peso reemplazaba incorrectamente el valor anterior **restando un kilogramo**, en lugar de asignar el nuevo valor directamente.
 
@@ -77,5 +103,13 @@ Este test asegura que el peso se actualiza con precisión al nuevo valor proporc
 
 java
 assertEquals(130, newPeso);
+
+### 🛠️ Cómo ejecutar los tests
+
+```bash
+mvn test
+```
+
+- Consulta el archivo `monitoreo-peso/src/test/java/com/ejemplo/TestActualizarPeso.java` para más detalles.
+  
 ---
-Consulta el archivo `monitoreo-peso/src/test/java/com/ejemplo/TestActualizarPeso.java` para más detalles.
