@@ -55,8 +55,7 @@ jobs:
       - name: Ejecutar pruebas de rendimiento con JMeter
         working-directory: monitoreo-peso
         run: |
-          mvn verify
-
+          mvn verify 
       - name: Publicar reporte de JMeter
         if: always()
         uses: actions/upload-artifact@v4
@@ -70,10 +69,25 @@ jobs:
         with:
           name: surefire-reports
           path: monitoreo-peso/target/surefire-reports/
-
-      - name: Análisis de calidad con SonarQube
+      
+      - name: Cache SonarQube packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: SonarQube Scan 1
         env:
-          working-directory: monitoreo-peso
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_1 }}  # analysis token associated to your project
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn verify sonar:sonar -Dsonar.token=${SONAR_TOKEN} -Dsonar.host.url=${SONAR_HOST_URL}
+        run: |
+            cd PROJECT1_PATH/
+            mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=SONAR_PROJECT1_KEY -Dsonar.projectName='SONAR_PROJECT1_NAME' 
+        # Replace variables with project path, key and name
+
