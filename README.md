@@ -257,3 +257,21 @@ Se publican los siguientes reportes:
 
     📄 Reportes de pruebas Surefire (JUnit):
     target/surefire-reports/
+
+- Consulta el archivo `.github/workflows/ci.yml` para más detalles.
+  
+## ✅ Conclusión
+
+El caso de **HealthTrack** evidencia que un error aparentemente simple en la lógica de actualización de peso generó consecuencias significativas en la experiencia del usuario, afectando la confianza y la utilidad de la plataforma.
+
+A través de este proyecto, se logró establecer una sólida base de calidad y escalabilidad. Al incorporar:
+
+- ✅ **Pruebas automatizadas** (unitarias, funcionales, de regresión y rendimiento).
+- 🔁 **Implementación de un pipeline CI/CD robusto** que garantiza validaciones continuas.
+- 🛠️ **Uso de herramientas modernas** como JUnit, Selenium, JMeter y SonarQube para asegurar la calidad del código.
+
+Estas mejoras no solo resolvieron el problema puntual de actualización de pesos, sino que también sentaron las bases para un desarrollo **sostenible, escalable y confiable**. 
+
+HealthTrack está ahora mejor preparado para ofrecer una experiencia precisa y confiable a sus usuarios, promoviendo un **monitoreo de salud efectivo y sin fricciones**.
+
+---
