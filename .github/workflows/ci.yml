@@ -41,23 +41,13 @@ jobs:
         working-directory: monitoreo-peso
         run: mvn clean test
 
-      - name: Ejecutar pruebas Selenium
-        working-directory: monitoreo-peso
-        run: mvn test
-
       - name: Instalar JMeter
         working-directory: monitoreo-peso
         run: |
           wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz
           tar -xzf apache-jmeter-5.6.3.tgz
           export PATH=$PATH:$PWD/apache-jmeter-5.6.3/bin
-     
-      #- name: Construir y analizar con SonarQube
-      #  working-directory: monitoreo-peso
-      #  run: mvn verify sonar:sonar -Dsonar.projectKey=monitoreo-peso \
-      #                              -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
-      #                              -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-      
+
       - name: Ejecutar pruebas de rendimiento con JMeter
         working-directory: monitoreo-peso
         run: |
@@ -69,7 +59,18 @@ jobs:
         with:
           name: reporte-jmeter
           path: monitoreo-peso/target/reporte/
-
+     
+      #- name: Construir y analizar con SonarQube
+      #  working-directory: monitoreo-peso
+      #  run: mvn verify sonar:sonar -Dsonar.projectKey=monitoreo-peso \
+      #                              -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
+      #                              -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+      #- name: Publicar reporte de SonarQube
+      #  if: always()
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: sonar-reports
+          
       - name: Subir reportes de pruebas (Surefire)
         if: always()
         uses: actions/upload-artifact@v4
